@@ -1,44 +1,151 @@
-<!DOCTYPE html>
+`<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scroling text</title>
-    <<link rel="stylesheet" type="text/css" href="style.css">
+    <title>Marquee</title>
+    <link rel="stylesheet"  href="style.css">
 </head>
 <body>
-    <h1>Scroling text</h1>
-    <style>
-        .background{
-            background-color: aqua;
-        }
-    .buttons {
-  background-color: #c4b108; 
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+<style>
+    @keyframes slide {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .animated-text {
+    align-items:  center;
+    justify-content: center;
+    font-size: 36px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: slide 2s ease forwards;
+  }
+  
+  .slider-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #f6f2f2c7;
 }
-        #main{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            gap: 16px;
-        }
     </style>
-    <div id="main">
-        <button id="⮈" class="buttons">⮈</button>
-        <button id="⮊" class="buttons">⮊</button>
-        <button id="⮉" class="buttons">⮉</button>
-        <button id="⮋" class="buttons">⮋</button>
-    </div>
-    <div id="scroll-container">
-        <div id="scroll-text">Scroling text<div>
+    <div class="light">
+      <div class="wire"></div>
+      <div class="bulb">
+        <span></span>
+        <span></span>
       </div>
-</body>
+      <div class="switch">
+        <div class="btn"></div>
+      </div>
+    </div>
+    <div class="gradient"></div>
+    </div>
+    <div>
+        <a href="#" style="--clr: #342095" id="leftBtn"><span>⮈</span></a>
+        <a href="#" style="--clr: #24971F" id="rightBtn"><span>⮊</span></a>
+        <a href="#" style="--clr: #6A39B2" id="upBtn"><span>⮉</span></a>
+        <a href="#" style="--clr: #168777" id="downBtn"><span>⮋</span></a>
+         <div id="marquee" class="animated-text">
+        <div id="text">Marquee</div>
+      </div>
+    </div> 
+    <div class="speed-control">
+      <input type="range" min="1" max="10" value="5" class="slider" id="speedSlider">
+      <div class="slider-labels">
+      <span>Slow</span>
+     <span>Fast</span>
+      </div>
+    </div>
+      <div class="panel">
+        <h2>Text Style Panel</h2>
+        <form id="textStyleForm">
+            <div class="form-group">
+                <label for="fontFamily">Font Family:</label>
+                <select id="fontFamily">
+                    <option value="Arial">Arial</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Monoscope">Monoscope</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fontSize">Font Size:</label>
+                <input type="number" id="fontSize" min="16" max="48" value="40">
+            </div>
+            <div class="form-group">
+                <label for="fontColor">Font Color:</label>
+                <input type="color" id="fontColor" value="#000000">
+            </div>
+        </form>
+      </div>
 <script>
+ let text1 = document.getElementById('text');
+document.getElementById('leftBtn').addEventListener('click', function() {
+  text.classList.remove('moveRight', 'moveUp', 'moveDown');
+  text.classList.add('moveLeft');
+});
+
+document.getElementById('upBtn').addEventListener('click', function() {
+  text.classList.remove('moveRight', 'moveLeft', 'moveDown');
+  text.classList.add('moveUp');
+});
+
+document.getElementById('rightBtn').addEventListener('click', function() {
+  text.classList.remove('moveLeft', 'moveUp', 'moveDown');
+  text.classList.add('moveRight');
+});
+
+document.getElementById('downBtn').addEventListener('click', function() {
+  text.classList.remove('moveRight', 'moveUp', 'moveLeft');
+  text.classList.add('moveDown');
+});
 </script>
-</html>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const speedSlider = document.getElementById('speedSlider');
+  function updateTextSpeed(speed) {
+    text.style.animationDuration = `${11 - speed}s`; 
+  }
+  updateTextSpeed(speedSlider.value);
+  speedSlider.addEventListener('input', function() {
+    updateTextSpeed(speedSlider.value);
+  });
+let slowLabel = document.querySelector('.slider-labels span:first-child');
+let fastLabel = document.querySelector('.slider-labels span:last-child');
+
+});
+</script>
+<script>
+document.getElementById('textStyleForm').addEventListener('input', function() {
+    let fontFamily = document.getElementById('fontFamily').value;
+    let fontSize = document.getElementById('fontSize').value + 'px';
+    let fontColor = document.getElementById('fontColor').value;
+    
+    let text = document.getElementById('text');
+    text.style.fontFamily = fontFamily;
+    text.style.fontSize = fontSize;
+    text.style.color = fontColor;
+});
+</script>
+<audio id="audio" src="click.mp3" autostart="false"></
+audio>
+<script>
+  let btn = document.querySelector('.btn');
+  let body = document.querySelector('body');
+  let audio = document.querySelector('#audio');
+    btn.onclick = function(){
+      body.classList.toggle('on');
+      audio.play();
+    }
+</script>
+<body>
+<html>
